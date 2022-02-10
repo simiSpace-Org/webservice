@@ -1,0 +1,27 @@
+{
+  "name": "cloudassignments",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "supertest": "^6.2.2"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  },
+  "description": "Cloud Organization",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vasaikarSimii/webservice.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vasaikarSimii/webservice/issues"
+  },
+  "homepage": "https://github.com/vasaikarSimii/webservice#readme"
+}
