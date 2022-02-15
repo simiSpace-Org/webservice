@@ -1,4 +1,4 @@
-# webservice
+# webservice.simi
 
 1. Prerequisites for building and deploying your application locally:
     "git clone" -> your namespace repo into your local machine and load it into Visual Code Studio. 
