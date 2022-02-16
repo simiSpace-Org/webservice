@@ -7,9 +7,8 @@
 
 2. Build and Deploy instructions for the web application
    "npm init -y" -> initialize server
-   "npm install express" -> to setup server
-   "npm install jest"-> to write test cases
-   "npm install supertest" -> test cases
+   "npm install" -> to install server dependencies
+  
    "npm test" -> to test the test cases
    
 3. Install Postman to send api calls to server
