@@ -3,6 +3,7 @@
 1. Prerequisites for building and deploying your application locally:
     "git clone" -> your namespace repo into your local machine and load it into Visual Code Studio. 
     "git remote -v" -> verify that your organization is setup as your upstream repo
+    "git remote add upstream git@github.com:simiSpace-Org/webservice.git" -> add upstream
     
 
 2. Build and Deploy instructions for the web application
