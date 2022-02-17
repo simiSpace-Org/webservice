@@ -1,19 +1,32 @@
 {
   "name": "cloudassignments",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "jest --coverage"
+    "start": "nodemon server.js",
+    "test": "jest --testTimeout=10000",
+    "pretest": "cross-env NODE_ENV=test"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "express": "^4.17.2",
-    "supertest": "^6.2.2"
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "sequelize": "^6.16.1",
+    "supertest": "^6.2.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "jest": "^27.5.1"
+    "cross-env": "^7.0.3",
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
   },
   "description": "Cloud Organization",
   "repository": {
@@ -23,5 +36,8 @@
   "bugs": {
     "url": "https://github.com/vasaikarSimii/webservice/issues"
   },
-  "homepage": "https://github.com/vasaikarSimii/webservice#readme"
+  "homepage": "https://github.com/vasaikarSimii/webservice#readme",
+  "directories": {
+    "test": "tests"
+  }
 }
