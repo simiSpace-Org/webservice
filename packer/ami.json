@@ -1,0 +1,41 @@
+{
+    "variables": {
+        "aws_access_key": "",
+        "aws_secret_key": "",
+        "aws_region": "",
+        "subnet_id": "",
+        "source_ami": "",
+        "ssh_username": "ec2-user"
+    },
+    "builders": [
+        {
+            "type": "amazon-ebs",
+            "access_key": "{{user `aws_access_key`}}",
+            "secret_key": "{{user `aws_secret_key`}}",
+            "region": "{{user `aws_region`}}",
+            "instance_type": "t2.micro",
+            "vpc_id": "{{user `vpc_id`}}",
+            "subnet_id": "{{user `subnet_id`}}",
+            "source_ami": "{{user `source_ami`}}",
+            "ssh_username": "ec2-user",
+            "ami_name": "SimisCloud_csye6225_{{timestamp}}",
+            "ami_description": "Amazon AMI for CSYE 6225"
+        }
+    ],
+    "provisioners": [
+       { 
+        "type": "file",
+        "source": "/Users/seeminvasaikar/Desktop/webservice-main.zip",
+        "destination": "/tmp/webservice-main.zip"
+    },
+    {
+        "type": "file",
+        "source": "/Users/seeminvasaikar/Desktop/demoadd3/infrastructure/nodeapp.service",
+        "destination": "/tmp/nodeapp.service"
+    },
+    {
+            "type": "shell",
+            "script":"setup.sh"
+        }
+    ]
+}
