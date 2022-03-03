@@ -1,0 +1,55 @@
+name: Packer Validator
+
+on:
+
+  #Manually trigger workflow runs
+
+  workflow_dispatch:
+
+  #Trigger the workflow on push from the main branch
+
+  pull_request:
+
+    branches:
+
+      - main
+
+
+
+jobs:
+
+
+
+  #Test's job
+
+  tests:
+
+    name: packer validation
+
+    #Run on Ubuntu using the latest version
+
+    runs-on: ubuntu-latest
+
+    #Job's steps
+
+    steps:
+
+      - name: checkout repo
+
+        uses: actions/checkout@v2
+
+      # validate templates
+
+      - name: Validate Template
+
+        uses: hashicorp/packer-github-actions@master
+
+        with:
+
+          command: validate
+
+          arguments: -syntax-only
+
+          working_directory: packer
+
+          target: ami.json
