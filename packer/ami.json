@@ -27,8 +27,8 @@
     "provisioners": [
        { 
         "type": "file",
-        "source": "webservice-main.zip",
-        "destination": "/tmp/webservice-main.zip"
+        "source": "webservice.zip",
+        "destination": "/tmp/webservice.zip"
     },
     {
         "type": "file",
