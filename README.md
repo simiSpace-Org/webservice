@@ -25,6 +25,6 @@
     git push origin main
     git checkout assign1
     git pull origin main
-    git push origin assign1
+    git push origin assign1 test
 
-   
+   demo4
