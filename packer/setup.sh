@@ -22,9 +22,9 @@ mysql --connect-expired-password -u root -p$pass -e "ALTER USER 'root'@'localhos
 sudo mysqladmin -u root -pCoco@786 create cloud_database;
 cd /tmp
 sudo mv /tmp/nodeapp.service /etc/systemd/system/nodeapp.service
-sudo unzip webservice-main.zip
-sudo chown -R ec2-user:ec2-user webservice-main
-cd webservice-main
+sudo unzip webservice.zip
+sudo chown -R ec2-user:ec2-user webservice
+cd webservice
 sudo npm install bcrypt
 sudo npm install
 sudo systemctl start nodeapp.service
