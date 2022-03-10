@@ -32,7 +32,7 @@
     },
     {
         "type": "file",
-        "source": "packer/nodeapp.service",
+        "source": "webservice/packer/nodeapp.service",
         "destination": "/tmp/nodeapp.service"
     },
     {
