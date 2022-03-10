@@ -1,10 +1,10 @@
 [Unit]
-Description=Node App
+Description=SimisWebApp
 After=cloud-final.service
 
 [Service]
-WorkingDirectory=/tmp/webservice-main
-ExecStart=/usr/bin/node /tmp/webservice-main/server.js
+WorkingDirectory=/tmp/webservice
+ExecStart=/usr/bin/node /tmp/webservice/server.js
 Restart=always
 RestartSec=10
 StandardOutput=syslog
