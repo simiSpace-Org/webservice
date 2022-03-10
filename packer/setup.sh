@@ -8,8 +8,8 @@ sudo yum install -y nodejs
 sudo yum install -y postgresql
 
 cd /tmp
-sudo mv /tmp/webservice/packer/nodeapp.service /etc/systemd/system/nodeapp.service
 sudo unzip webservice.zip
+sudo mv /tmp/webservice/packer/nodeapp.service /etc/systemd/system/nodeapp.service
 sudo chown -R ec2-user:ec2-user webservice
 cd webservice
 sudo npm install bcrypt
