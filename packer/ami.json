@@ -1,11 +1,12 @@
 {
     "variables": {
-        "aws_access_key": "",
-        "aws_secret_key": "",
-        "aws_region": "",
-        "subnet_id": "",
-        "source_ami": "",
-        "ssh_username": "ec2-user"
+        "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+        "aws_secret_key": "{{env `AWS_SECRET_KEY_ID`}}",
+        "aws_region": "{{env `AWS_REGION`}}",
+        "subnet_id": "{{env `AWS_SUBNET_ID`}}",
+        "source_ami": "ami-0c293f3f676ec4f90",
+        "ssh_username": "ec2-user",
+        "ami_user_name": "{{env `AMI_USERS`}}"
     },
     "builders": [
         {
@@ -18,6 +19,7 @@
             "subnet_id": "{{user `subnet_id`}}",
             "source_ami": "{{user `source_ami`}}",
             "ssh_username": "ec2-user",
+            "ami_users": "{{user `ami_user_name`}}",
             "ami_name": "SimisCloud_csye6225_{{timestamp}}",
             "ami_description": "Amazon AMI for CSYE 6225"
         }
@@ -25,17 +27,17 @@
     "provisioners": [
        { 
         "type": "file",
-        "source": "/Users/seeminvasaikar/Desktop/webservice-main.zip",
-        "destination": "/tmp/webservice-main.zip"
+        "source": "webservice.zip",
+        "destination": "/tmp/webservice.zip"
     },
     {
         "type": "file",
-        "source": "/Users/seeminvasaikar/Desktop/demoadd3/infrastructure/nodeapp.service",
+        "source": "packer/nodeapp.service",
         "destination": "/tmp/nodeapp.service"
     },
     {
             "type": "shell",
-            "script":"setup.sh"
+            "script":"packer/setup.sh"
         }
     ]
 }
