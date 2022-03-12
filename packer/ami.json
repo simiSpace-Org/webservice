@@ -30,6 +30,11 @@
         "source": "webservice.zip",
         "destination": "/tmp/webservice.zip"
     },
+        {
+        "type": "file",
+        "source": "packer/pgdg.repo",
+        "destination": "/tmp/pgdg.repo"
+    },
     {
         "type": "file",
         "source": "packer/nodeapp.service",
