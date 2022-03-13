@@ -17,10 +17,6 @@ cd webservice
 sudo npm install bcrypt
 sudo npm install
 node server.js
-sudo systemctl start nodeapp.service
-sudo systemctl status nodeapp.service
-sudo systemctl enable nodeapp.service
-
 
 
 
