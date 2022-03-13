@@ -32,17 +32,17 @@
     },
         {
         "type": "file",
-        "source": "packer/pgdg.repo",
+        "source": "pgdg.repo",
         "destination": "/tmp/pgdg.repo"
     },
     {
         "type": "file",
-        "source": "packer/nodeapp.service",
+        "source": "nodeapp.service",
         "destination": "/tmp/nodeapp.service"
     },
     {
             "type": "shell",
-            "script":"packer/setup.sh"
+            "script":"setup.sh"
         }
     ]
 }
