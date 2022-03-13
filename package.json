@@ -1,43 +1,39 @@
 {
-  "name": "cloudassignments",
+  "name": "assignment-1",
   "version": "1.0.0",
-  "main": "server.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "lint": "eslint *.js",
+    "start": "nodemon index",
     "test": "jest --testTimeout=10000",
     "pretest": "cross-env NODE_ENV=test"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1087.0",
     "bcrypt": "^5.0.1",
-    "bcryptjs": "^2.4.3",
+    "buffer": "^6.0.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "eslint": "^8.8.0",
     "express": "^4.17.2",
-    "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.18.1",
-    "mysql2": "^2.3.3",
+    "fs": "^0.0.1-security",
+    "multer": "^1.4.4",
     "nodemon": "^2.0.15",
-    "sequelize": "^6.16.1",
-    "supertest": "^6.2.2",
+    "pg": "^8.7.3",
     "uuid": "^8.3.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
     "jest": "^27.5.1",
     "supertest": "^6.2.2"
-  },
-  "description": "Cloud Organization",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vasaikarSimii/webservice.git"
-  },
-  "bugs": {
-    "url": "https://github.com/vasaikarSimii/webservice/issues"
-  },
-  "homepage": "https://github.com/vasaikarSimii/webservice#readme",
-  "directories": {
-    "test": "tests"
   }
 }
