@@ -16,9 +16,10 @@ sudo chown -R ec2-user:ec2-user webservice
 cd webservice
 sudo npm install bcrypt
 sudo npm install
-sudo systemctl enable nodeapp.service
-sudo systemctl start nodeapp.service
-
+sudo npm install pm2@latest -g
+sudo pm2 startup systemd --service-name nodeapp
+sudo pm2 start server.js
+sudo pm2 save
 
 
 
