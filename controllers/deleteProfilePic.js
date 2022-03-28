@@ -24,9 +24,7 @@ const accessKeyId = process.env.AWS_ACCESS_KEY;
 const secretAccessKey = process.env.AWS_SECRET_KEY;
 
 const s3 = new AWS.S3({
-    region,
-    accessKeyId,
-    secretAccessKey
+    region
 })
 
 //Controller to Delete Pic
