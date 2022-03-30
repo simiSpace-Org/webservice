@@ -28,4 +28,5 @@ packer build -var-file='dev_vars.json' ami.json
     ./packer validate ami.json
 
 ```
-demo6Test
+
+demo7
