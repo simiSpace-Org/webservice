@@ -14,23 +14,9 @@ jobs:
   ci_cd:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repository
+      - name: Checkout GitHub Repository
         uses: actions/checkout@v2
-
-      - name: Built Deployment Artifacts
-        run: |
-          mkdir codedeploy_artifact
-          zip -r ${{ env.ARTIFACT_NAME }} webservice codedeploy/*.sh appspec.yml
-          pwd
-          ls -al
-          mv ${{ env.ARTIFACT_NAME }} codedeploy_artifact
-          cd codedeploy_artifact
-          pwd
-          ls -al
-          cd ..
-          pwd
-          ls -al
-
+        
       - name: Configuring AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
