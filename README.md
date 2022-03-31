@@ -29,4 +29,4 @@ packer build -var-file='dev_vars.json' ami.json
 
 ```
 
-test7codedeploy7
+Test7Code3Deploy7
