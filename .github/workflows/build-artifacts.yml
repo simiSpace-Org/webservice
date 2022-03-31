@@ -1,14 +1,14 @@
-name: Packer Build
+name: Building Artifacts
 
 env:
   ARTIFACT_NAME: webservice-${{ github.sha }}.zip
   CODEDEPLOY_APPLICATION_NAME: csye6225-webapp
-  CODEDEPLOY_APPLICATION_DEPLOYMENT_GROUP_NAME: csye6225-webapp-deployment
+  APPLICATION_DEPLOYMENT_GROUP_NAME: csye6225-webapp-deployment
   AWS_REGION: us-east-1
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   ci_cd:
@@ -34,8 +34,8 @@ jobs:
       - name: Configuring AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_ID }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Upload Artifact Zip to S3
@@ -47,8 +47,8 @@ jobs:
           output=$(aws deploy create-deployment \
           --application-name ${{ env.CODEDEPLOY_APPLICATION_NAME }} \
           --deployment-config-name CodeDeployDefault.AllAtOnce \
-          --deployment-group-name ${{ env.CODEDEPLOY_APPLICATION_DEPLOYMENT_GROUP_NAME }} \
-          --description "CSYE6225 - CodeDeploy" \
+          --deployment-group-name ${{ env.APPLICATION_DEPLOYMENT_GROUP_NAME }} \
+          --description "CSYE6225 - SimisCodeDeploy" \
           --s3-location bucket=${{ secrets.CODEDEPLOY_BUCKET }},bundleType=zip,key=${{ env.ARTIFACT_NAME }} \
           --region ${{ env.AWS_REGION }} \
           --output json)
@@ -57,15 +57,15 @@ jobs:
           dID=$(echo $output | jq -r '.deploymentId')
           aws deploy wait deployment-successful --deployment-id $dID
 
-      - name: Packer Build
+      - name: Building Packer AMI
         uses: ExitoLab/packer_build_action_aws@v0.2.10
         with:
           templateFile: "packer/ami.json"
           varFile: vars.json
           workingDir: .
         env:
-          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_KEY_ID: ${{ secrets.AWS_SECRET_KEY_ID }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AMI_USERS: ${{ secrets.AMI_USERS }}
           
