@@ -4,29 +4,12 @@
 ## About the project
 Created an node application to perform CRUD operations on S3 Bucket  
 
-## Teach Stack
-NodeJs
-ExpressJs Framework
-PostgreSQL
-
 ## Features
-Packer to build AWS Ami
-Objects upload to S3
-Base Authentication
-Password Encryption
+1. Packer to build AWS AMI to create Profuction Environment by installing dependencies
+2. Base Authentication
+3. Password Encryption
+4. Objects upload to S3
+5. Continuous Integration and Continuous Deployment setup through Github Actions
 
-# Packer Commands
-
-export PACKER_LOG=1
-
-```
-//go to folder location of packer and run the following commands
-cd Desktop/demoadd3/infrastructure/packer 
-packer build -var-file='dev_vars.json' ami.json
-
-# Validate packer
-    ./packer validate ami.json
-
-```
 
 Test7Code3Deploy7
