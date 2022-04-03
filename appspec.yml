@@ -6,6 +6,10 @@ files:
     destination: /tmp/webservice/
 
 hooks:
+  BeforeInstall:
+    - location: ./codedeploy/beforeInstall.sh
+      timeout: 300
+      runas: ec2-user
   AfterInstall:
     - location: ./codedeploy/afterInstall.sh
       timeout: 300
@@ -14,7 +18,4 @@ hooks:
     - location: •/codedeploy/applicationStart.sh
       timeout: 300
       runas: ec2-user
-  BeforeInstall:
-    - location: ./codedeploy/beforeInstall.sh
-      timeout: 300
-      runas: ec2-user
+

@@ -1,5 +1,5 @@
 #!/bin/bash
-pm2 kill
+#pm2 kill
 cd /tmp
 # sudo unzip webservice.zip
 # sudo mv /tmp/webservice/packer/nodeapp.service /etc/systemd/system/nodeapp.service
