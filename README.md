@@ -10,6 +10,5 @@ Created an node application to perform CRUD operations on S3 Bucket
 3. Password Encryption
 4. Objects upload to S3
 5. Continuous Integration and Continuous Deployment setup through Github Actions
-
-
+6. 
 Test7Code3Deploy777
