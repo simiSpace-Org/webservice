@@ -49,7 +49,7 @@ app.delete('/v1/user/self/pic',deleteProfilePic);
 
 
 
-app.get("/healthz", (req, res) => {
+app.get("/healthzz", (req, res) => {
     try {
         res.sendStatus(200);
     } catch (err) {
