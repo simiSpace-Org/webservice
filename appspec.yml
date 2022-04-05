@@ -15,7 +15,7 @@ hooks:
       timeout: 300
       runas: ec2-user
   ApplicationStart:
-    - location: •/codedeploy/applicationStart.sh
+    - location: ./codedeploy/applicationStart.sh
       timeout: 300
       runas: ec2-user
 
