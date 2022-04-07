@@ -5,6 +5,10 @@ const {
     comparePassword
 } = require("../utils/helper");
 
+const SDC = require('statsd-client');
+sdc = new SDC({host: 'localhost', port: 8125});
+const logger = require('../logger');
+
 const viewUser = (req, res) => {
     const [username, password] = basicAuth(req);
 
@@ -28,6 +32,8 @@ const viewUser = (req, res) => {
                         if (compareValue) {
                             const data = result.rows[0];
                             delete data["password"];
+                            logger.info('View User Pic api call has been hit');
+                            sdc.increment('viewUser_counter');
                             return res.status(200).json(data);
                             
                         } else {

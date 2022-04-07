@@ -7,6 +7,10 @@ const Buffer = require('buffer');
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs')
 
+const SDC = require('statsd-client');
+sdc = new SDC({host: 'localhost', port: 8125});
+const logger = require('../logger');
+
 const {
     basicAuth,
     comparePassword
@@ -55,7 +59,8 @@ const addProfilePic = (req, res) => {
                             const data = result.rows[0];
                             delete data["password"];
                             //console.log("ThisUsername", username);
-                            
+                            logger.info('User Profile Pic Added');
+                            sdc.increment('profilePic_counter');
                             //add pic post authentication
                             let date = new Date().toISOString().slice(0, 10);
                             const fileStream = fs.createReadStream(profilePic.path);

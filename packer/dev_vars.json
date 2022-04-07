@@ -1,7 +1,7 @@
 {
     "aws_region": "us-east-1",
-    "aws_access_key":"AKIA5UOO6N7FNACMPCM5",
-    "aws_secret_key":"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",
+    "aws_access_key":"AKIA5UOO6N7FBHBLCS4Q",
+    "aws_secret_key":"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",
     "source_ami":"ami-048ff3da02834afdc",
     "vpc_id":"vpc-0d90a32f936350838",
     "subnet_id":"subnet-06d27a19ca304fb14"

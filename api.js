@@ -1,13 +1,6 @@
 const express = require('express');
 const app = express();
 
-/*
-const createUser = require("./controllers/createUser");
-const updateUser = require("./controllers/updateUser");
-const viewUser = require("./controllers/viewUser");
-const addUserPic = require("./controllers/addUserPic");
-//const createUser = require("./controllers/createUser");
-*/
 
 const {
     createUser,
@@ -25,11 +18,9 @@ const unlinkFile = util.promisify(fs.unlink)
 const multer = require('multer')
 const upload = multer({ dest: 'images/' })
 
-
-//const upload = multer({ dest: 'uploads/' })
-//const upload = multer({ dest: 'uploads/' });
-//const { uploadFile, getFileStream } = require('./s3')
-
+const SDC = require('statsd-client');
+sdc = new SDC({host: 'localhost', port: 8125});
+const logger = require('../logger');
 
 const cors = require("cors");
 
@@ -52,8 +43,11 @@ app.delete('/v1/user/self/pic',deleteProfilePic);
 app.get("/healthzz", (req, res) => {
     try {
         res.sendStatus(200);
+        logger.info('Health Check');
+        sdc.increment('health_check');
     } catch (err) {
         res.json(err.message);
+
     }
 });
 

@@ -7,6 +7,10 @@ const Buffer = require('buffer');
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs')
 
+const SDC = require('statsd-client');
+sdc = new SDC({host: 'localhost', port: 8125});
+const logger = require('../logger');
+
 const {
     basicAuth,
     comparePassword
@@ -52,7 +56,8 @@ const deleteProfilePic = (req, res) => {
                             const data = result.rows[0];
                             delete data["password"];
                             console.log("ThisUsername", username);
-                            
+                            logger.info('User Pic Deletion api call has been hit');
+                            sdc.increment('deletePic_counter');
                             //delete pic post authentication
                             const userId = result.rows[0].id;
                             pool.query(`Select path from photos where user_id = $1`, [userId], (err, result) => {
