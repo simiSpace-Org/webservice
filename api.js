@@ -20,7 +20,7 @@ const upload = multer({ dest: 'images/' })
 
 const SDC = require('statsd-client');
 sdc = new SDC({host: 'localhost', port: 8125});
-const logger = require('../logger');
+const logger = require('./logger');
 
 const cors = require("cors");
 
