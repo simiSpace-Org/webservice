@@ -4,17 +4,21 @@ os: linux
 files:
   - source: ./
     destination: /tmp/webservice/
+  - source: ./cloudwatch-config.json
+    destination: /opt     
+    
 
 hooks:
+  BeforeInstall:
+    - location: ./codedeploy/beforeInstall.sh
+      timeout: 300
+      runas: ec2-user
   AfterInstall:
     - location: ./codedeploy/afterInstall.sh
       timeout: 300
       runas: ec2-user
   ApplicationStart:
-    - location: •/codedeploy/applicationStart.sh
+    - location: ./codedeploy/applicationStart.sh
       timeout: 300
       runas: ec2-user
-  BeforeInstall:
-    - location: ./codedeploy/beforeInstall.sh
-      timeout: 300
-      runas: ec2-user
+
