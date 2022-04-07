@@ -2,8 +2,9 @@ const {
     v4: uuidv4
 } = require("uuid");
 
-var StatsD = require('node-statsd'),
-client = new StatsD();
+const SDC = require('statsd-client');
+sdc = new SDC({host: 'localhost', port: 8125});
+const logger = require('../logger');
 
 const {
     validateEmail,
@@ -47,6 +48,7 @@ const createUser = (req, res) => {
             pool.query(queries, [username], (err, result) => {
                 console.log("Verifying is username exists", username)
                 logger.info('User creation api call has been hit');
+                sdc.increment('apicalls_counter');
                 if (!result.rowCount) {
                     queries = "INSERT INTO users(first_name, last_name, password, username, account_created, account_updated, id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id, first_name, last_name, username, account_created, account_updated";
                     logger.info('New user Created');
