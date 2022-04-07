@@ -2,6 +2,9 @@ const {
     v4: uuidv4
 } = require("uuid");
 
+var StatsD = require('node-statsd'),
+client = new StatsD();
+
 const {
     validateEmail,
     generatePasswordHash
@@ -43,8 +46,11 @@ const createUser = (req, res) => {
             let queries = "Select * from users where username = $1";
             pool.query(queries, [username], (err, result) => {
                 console.log("Verifying is username exists", username)
+                logger.info('User creation api call has been hit');
                 if (!result.rowCount) {
                     queries = "INSERT INTO users(first_name, last_name, password, username, account_created, account_updated, id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id, first_name, last_name, username, account_created, account_updated";
+                    logger.info('New user Created');
+                    client.increment('my_counter');
                     const values = [first_name, last_name, hashPassword, username, account_created, account_updated, id];
                     console.log("adding data to db", values)
                     pool.query(queries, values, (error, results) => {
@@ -55,7 +61,9 @@ const createUser = (req, res) => {
                         }
                     })
                 } else {
-                    return res.status(400).json("Username already in used");
+                    logger.error('Username already in use');
+                    return res.status(400).json("Username already in use");
+                    
                 }
             })
         });

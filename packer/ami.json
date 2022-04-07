@@ -25,21 +25,6 @@
         }
     ],
     "provisioners": [
-       { 
-        "type": "file",
-        "source": "webservice.zip",
-        "destination": "/tmp/webservice.zip"
-    },
-        {
-        "type": "file",
-        "source": "packer/pgdg.repo",
-        "destination": "/tmp/pgdg.repo"
-    },
-    {
-        "type": "file",
-        "source": "packer/nodeapp.service",
-        "destination": "/tmp/nodeapp.service"
-    },
     {
         "type": "shell",
         "script":"packer/setup.sh"
@@ -54,6 +39,13 @@
             "chmod +x ./install",
             "sudo ./install auto",
             "sudo service codedeploy-agent start"
+        ]
+    },
+    {
+        "type": "shell",
+        "inline":[
+            "sudo yum install amazon-cloudwatch-agent -y",
+            "sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a start"
         ]
     }
 

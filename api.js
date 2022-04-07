@@ -1,13 +1,6 @@
 const express = require('express');
 const app = express();
 
-/*
-const createUser = require("./controllers/createUser");
-const updateUser = require("./controllers/updateUser");
-const viewUser = require("./controllers/viewUser");
-const addUserPic = require("./controllers/addUserPic");
-//const createUser = require("./controllers/createUser");
-*/
 
 const {
     createUser,
