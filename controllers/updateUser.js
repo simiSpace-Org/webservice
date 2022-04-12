@@ -6,6 +6,10 @@ const {
     comparePassword
 } = require("../utils/helper");
 
+const SDC = require('statsd-client');
+sdc = new SDC({host: 'localhost', port: 8125});
+const logger = require('../logger');
+
 const updateUser = (req, res) => {
     const [username, password] = basicAuth(req);
 
@@ -28,6 +32,8 @@ const updateUser = (req, res) => {
                     .then(compareValue => {
                         if (compareValue) {
                             updateData(req, res, username);
+                            logger.info('User Info Update api call has been hit');
+                            sdc.increment('updateUser_counter');
                         } else {
                             return res.status(400).json("Incorrect Password");
                         }

@@ -25,7 +25,9 @@
     "node-statsd": "^0.1.1",
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
-    "uuid": "^8.3.2"
+    "statsd-client": "^0.4.7",
+    "uuid": "^8.3.2",
+    "winston": "^3.7.2"
   },
   "jest": {
     "testEnvironment": "node",
