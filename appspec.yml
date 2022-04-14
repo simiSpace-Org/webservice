@@ -3,9 +3,7 @@ os: linux
 
 files:
   - source: ./
-    destination: /tmp/webservice/
-  - source: ./cloudwatch-config.json
-    destination: /opt     
+    destination: /tmp/webservice/    
     
 
 hooks:

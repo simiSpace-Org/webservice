@@ -1,8 +1,8 @@
-const pool = require("../db");
+const client = require("../db");
 require('dotenv').config();
 const multer = require('multer');
 //var upload = multer({ dest: 'images/' })
-
+AWS.config.update({region: "us-east-1"});
 const Buffer = require('buffer');
 const S3 = require('aws-sdk/clients/s3');
 const fs = require('fs')
@@ -44,10 +44,10 @@ const addProfilePic = (req, res) => {
         });
     }
 
-    let queries = "SELECT * from users where username = $1";
+    let queries = "Select id, verified from users where username = $1";
     let values = [username];
 
-    pool.query(queries, values)
+    client.query(queries, values)
         .then(result => {
             if (result.rowCount) {
                 const {
@@ -69,14 +69,14 @@ const addProfilePic = (req, res) => {
                             const first_name = result.rows[0].first_name
                            // console.log("filename", profilePic.filename)
                             //delete the old pic and upload new one
-                            pool.query(`Select path from photos where user_id = $1`, [userId], (err, result) => {
+                            client.query(`Select path from photos where user_id = $1`, [userId], (err, result) => {
                                 if (result.rows.length) {
                                     s3.deleteObject({
                                         Bucket: process.env.AWS_BUCKET_NAME,
                                         Key: result.rows[0].path
                                     }, function (err, data) {
                                         if (data) {
-                                            pool.query(`DELETE FROM photos WHERE user_id = $1`, [userId], (error, r) => {
+                                            client.query(`DELETE FROM photos WHERE user_id = $1`, [userId], (error, r) => {
                                             })
                                         }
                                     })
@@ -102,7 +102,7 @@ const addProfilePic = (req, res) => {
                                 }
                                 const text = 'INSERT INTO photos(id, user_id, file_name, url, upload_date, path) VALUES($1, $2,  $3, $4, $5, $6) RETURNING id, user_id, file_name, url, upload_date, path';
                                 const values = [uuidv4(), userId, profilePic.filename, data.Location, date, data.Key];
-                                pool.query(text, values, (err, result) => {
+                                client.query(text, values, (err, result) => {
                                     if (err) {
                                         console.log('Bad Request while inserting for uploading pic');
                                         res.status(400).json({
@@ -121,8 +121,8 @@ const addProfilePic = (req, res) => {
                             })
                             console.log("Uploading User Pic");
 
-                        } else {
-                            return res.status(400).json("Incorrect Password");
+                        } else if (!result.rows[0],verified){
+                            return res.status(404).json("User not verified to perform this action");
                         }
                     })
             } else {

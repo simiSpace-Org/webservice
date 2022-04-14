@@ -1,4 +1,4 @@
-const pool = require("../db");
+const client = require("../db");
 require('dotenv').config();
 const multer = require('multer');
 //var upload = multer({ dest: 'images/' })
@@ -44,7 +44,7 @@ const deleteProfilePic = (req, res) => {
 
     let queries = "SELECT * from users where username = $1";
     let values = [username];
-    pool.query(queries, values)
+    client.query(queries, values)
         .then(result => {
             if (result.rowCount) {
                 const {
@@ -60,14 +60,14 @@ const deleteProfilePic = (req, res) => {
                             sdc.increment('deletePic_counter');
                             //delete pic post authentication
                             const userId = result.rows[0].id;
-                            pool.query(`Select path from photos where user_id = $1`, [userId], (err, result) => {
+                            client.query(`Select path from photos where user_id = $1`, [userId], (err, result) => {
                                 if (result.rows.length) {
                                     s3.deleteObject({
                                         Bucket: process.env.AWS_BUCKET_NAME,
                                         Key: result.rows[0].path
                                     }, function (err, data) {
                                         if (data) {
-                                            pool.query(`DELETE FROM photos WHERE user_id = $1`, [userId], (error, r) => {
+                                            client.query(`DELETE FROM photos WHERE user_id = $1`, [userId], (error, r) => {
                                                 console.log("deleted pic from db and s3");
                                                 return res.status(201).json("Profile Pic Deleted Successfully!");
                                             })

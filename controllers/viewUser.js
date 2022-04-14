@@ -1,4 +1,4 @@
-const pool = require("../db");
+const client = require("../db");
 
 const {
     basicAuth,
@@ -21,7 +21,7 @@ const viewUser = (req, res) => {
     let queries = "SELECT * from users where username = $1";
     let values = [username];
     
-    pool.query(queries, values)
+    client.query(queries, values)
         .then(result => {
             if (result.rowCount) {
                 const {
@@ -32,7 +32,8 @@ const viewUser = (req, res) => {
                         if (compareValue) {
                             const data = result.rows[0];
                             delete data["password"];
-                            logger.info('View User Pic api call has been hit');
+                            console.log("query result", result)
+                            logger.info('View User Pic api call hasen hit');
                             sdc.increment('viewUser_counter');
                             return res.status(200).json(data);
                             

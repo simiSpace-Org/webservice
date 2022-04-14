@@ -4,6 +4,8 @@ const viewUser = require("./viewUser");
 const addProfilePic = require("./addProfilePic");
 const getProfilePic = require("./getProfilePic");
 const deleteProfilePic = require("./deleteProfilePic");
+const verifyUser = require("./verifyUser");
+
 
 
 
@@ -13,5 +15,6 @@ module.exports = {
     viewUser,
     addProfilePic,
     getProfilePic,
-    deleteProfilePic
+    deleteProfilePic,
+    verifyUser
 };
