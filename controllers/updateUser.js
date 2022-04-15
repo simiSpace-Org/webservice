@@ -1,4 +1,4 @@
-const pool = require("../db");
+const client = require("../db");
 
 const {
     generatePasswordHash,
@@ -22,7 +22,7 @@ const updateUser = (req, res) => {
     let queries = "SELECT password from users where username = $1";
     let values = [username];
 
-    pool.query(queries, values)
+    client.query(queries, values)
         .then(result => {
             if (result.rowCount) {
                 const {
@@ -92,7 +92,7 @@ const updatingQuery = (req, res, username, account_updated) => {
     const queries = `UPDATE users SET ${updates} where username = $${dKeys.length +  1}`;
     const values = [...Object.values(req.body), account_updated, username];
     
-    pool.query(queries, values, (err, result) => {
+    client.query(queries, values, (err, result) => {
         if (err) {
             res.status(400).json("Error updating data to database while creating user");
         } else {

@@ -43,6 +43,7 @@ app.delete('/v1/user/self/pic',deleteProfilePic);
 app.get("/healthzz", (req, res) => {
     try {
         res.sendStatus(200);
+    
         logger.info('Health Check');
         sdc.increment('health_check');
     } catch (err) {

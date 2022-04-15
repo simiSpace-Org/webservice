@@ -1,4 +1,4 @@
-const pool = require("../db");
+const client = require("../db");
 require('dotenv').config();
 const multer = require('multer');
 //var upload = multer({ dest: 'images/' })
@@ -48,7 +48,7 @@ const getUserPic = (req, res) => {
     let queries = "SELECT * from users where username = $1";
     let values = [username];
      
-    pool.query(queries, values)
+    client.query(queries, values)
         .then(result => {
             if (result.rowCount) {
                 const {
@@ -63,7 +63,7 @@ const getUserPic = (req, res) => {
                             logger.info('Get Profile Pic api call has been hit');
                             sdc.increment('getProfilePic_counter');
                             const userId = result.rows[0].id;
-                            pool.query(`Select path from photos where user_id = $1`, [userId], (err, result) => {
+                            client.query(`Select path from photos where user_id = $1`, [userId], (err, result) => {
                                 if (result.rows.length) {
                                     const downloadParams = {
                                         Bucket: process.env.AWS_BUCKET_NAME,
@@ -78,7 +78,7 @@ const getUserPic = (req, res) => {
                                 }
 
                             });
-                            pool.query(`Select * from photos where user_id = $1`, [userId], (err, result) => {
+                            client.query(`Select id, verified from users where username = $1`, [userId], (err, result) => {
                                 if (result.rows.length) {
         
                                    const data = result.rows[0];
@@ -87,10 +87,10 @@ const getUserPic = (req, res) => {
                                 }
 
                             });
-
                             
-                        } else {
-                            return res.status(400).json("Incorrect Password");
+                        } else if(!result.rows[0].verified){
+                            logger.info('User not Verified to perform delete pic operation');
+                            return res.status(400).json("Unverified User");
                         }
                     })
             } else {
@@ -103,24 +103,3 @@ const getUserPic = (req, res) => {
 
 }
 module.exports = getUserPic;
-
-                        //Key: var imgData = `images/${first_name}_${userId}/` + profilePic.filename;
-/*
-                        function getFileStream(fileKey) {
-                            const downloadParams = {
-                                Key: fileKey,
-                                Bucket: bucketName
-                            }
-
-                            return s3.getObject(downloadParams).createReadStream()
-                        }
-                        exports.getFileStream = getFileStream
-
-                        app.get('/images/:key', (req, res) => {
-                            console.log(req.params)
-                            const key = req.params.key
-                            const readStream = getFileStream(key)
-
-                            readStream.pipe(res)
-                        })
-*/

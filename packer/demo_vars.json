@@ -1,8 +1,8 @@
 {
     "aws_region": "us-east-1",
-    "aws_access_key":"AKIA5J3IFYVK5ZF4MPMH",
-    "aws_secret_key":"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",
+    "aws_access_key":"AKIA5J3IFYVKUSW4IDG7",
+    "aws_secret_key":"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",
+    "source_ami":"ami-048ff3da02834afdc",
     "vpc_id":"vpc-0735ee11eee36d405",
-    "subnet_id":"subnet-0f212d3b2f55a0405",
-    "source_ami":"ami-048ff3da02834afdc"
+    "subnet_id":"subnet-0f212d3b2f55a0405"
 }
